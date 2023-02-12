@@ -24,6 +24,14 @@ const App: React.FC = () => {
     window.open(selectedBoard!.viewLink, "_blank");
   };
 
+  const addBoardEmbed = async () => {
+    const embed = await miro.board.createEmbed({
+      url: selectedBoard!.viewLink,
+      mode: 'modal',
+    });
+    await miro.board.viewport.zoomTo(embed);
+  };
+
   const cancelSelect = () => {
     setSelectedBoard(undefined);
   };
@@ -44,11 +52,11 @@ const App: React.FC = () => {
         <span className="icon-eye"></span>
         Open In New Tab
       </button>
-      <button className="button button-primary" disabled>
-        Open In Current Tab
+      <button className="button button-primary" onClick={addBoardEmbed}>
+        Embed On Current Board
       </button>
       <button className="button button-primary" disabled>
-        Embed On Current Board
+        Open In Current Tab
       </button>
       <button className="button button-secondary" onClick={cancelSelect}>
         Back
