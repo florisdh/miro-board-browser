@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getAnalytics, logEvent } from "firebase/analytics";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBr1RiyLGGN-JX9-4bYt7WqBnZVsSS5BN8",
@@ -14,10 +14,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-// export const sendMetricBoardOpened = () => {
-//     analytics.
-// }
+export const sendMetricBoardPicked = () => {
+    logEvent(analytics, 'BOARD_PICKED');
+}
 
-// export sendMetricBoardEmbedded = () => {
+export const sendMetricBoardOpened = () => {
+    logEvent(analytics, 'BOARD_OPEN_NEW_TAB');
+}
 
-// }
+export const sendMetricBoardEmbedded = () => {
+    logEvent(analytics, 'BOARD_EMBED');
+}

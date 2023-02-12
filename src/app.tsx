@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './firebase';
+import { sendMetricBoardEmbedded, sendMetricBoardOpened, sendMetricBoardPicked } from './firebase';
 
 const App: React.FC = () => {
 
@@ -17,12 +18,14 @@ const App: React.FC = () => {
       success: (result: any) => {
         document.getElementById('boardsPickerContainer')!.innerHTML = '';
         setSelectedBoard(result);
+        sendMetricBoardPicked();
       }
     });
   }, [selectedBoard]);
 
   const openBoardInNewTab = () => {
     window.open(selectedBoard!.viewLink, "_blank");
+    sendMetricBoardOpened();
   };
 
   const addBoardEmbed = async () => {
@@ -31,6 +34,7 @@ const App: React.FC = () => {
       mode: 'modal',
     });
     await miro.board.viewport.zoomTo(embed);
+    sendMetricBoardEmbedded();
   };
 
   const cancelSelect = () => {
