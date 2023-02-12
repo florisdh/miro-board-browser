@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
+import './firebase';
 
 const App: React.FC = () => {
 
