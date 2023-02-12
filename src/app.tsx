@@ -1,45 +1,72 @@
 import * as React from 'react';
-import {createRoot} from 'react-dom/client';
-
-async function addSticky() {
-  const stickyNote = await miro.board.createStickyNote({
-    content: 'Hello, World!',
-  });
-
-  await miro.board.viewport.zoomTo(stickyNote);
-}
+import { createRoot } from 'react-dom/client';
 
 const App: React.FC = () => {
+
+  const [selectedBoard, setSelectedBoard] = React.useState<BoardPickerSelectResult>();
+
   React.useEffect(() => {
-    addSticky();
-  }, []);
+    if (selectedBoard) {
+      return;
+    }
+    miroBoardsPicker.open({
+      clientId: '3458764530513120042',
+      action: 'select',
+      iframeContainer: 'boardsPickerContainer',
+      success: (result: any) => {
+        document.getElementById('boardsPickerContainer')!.innerHTML = '';
+        setSelectedBoard(result);
+      }
+    });
+  }, [selectedBoard]);
+
+  const openBoardInNewTab = () => {
+    window.open(selectedBoard!.viewLink, "_blank");
+  };
+
+  const cancelSelect = () => {
+    setSelectedBoard(undefined);
+  };
+
+  const BoardsPickerApp = () => (
+    <div id="boardsPickerContainer" />
+  );
+
+  const BoardActionsApp = () => (
+    <div id="boardActionsApp">
+      <h2 className="h2">
+        What would you like to do with board <b>"{selectedBoard?.name}"</b>?
+      </h2>
+
+      <br />
+
+      <button className="button button-primary" onClick={openBoardInNewTab}>
+        <span className="icon-eye"></span>
+        Open In New Tab
+      </button>
+      <button className="button button-primary" disabled>
+        Open In Current Tab
+      </button>
+      <button className="button button-primary" disabled>
+        Embed On Current Board
+      </button>
+      <button className="button button-secondary" onClick={cancelSelect}>
+        Back
+      </button>
+    </div>
+  );
 
   return (
-    <div className="grid wrapper">
-      <div className="cs1 ce12">
-        <img src="/src/assets/congratulations.png" alt="" />
-      </div>
-      <div className="cs1 ce12">
-        <h1>Congratulations!</h1>
-        <p>You've just created your first Miro app!</p>
-        <p>
-          To explore more and build your own app, see the Miro Developer
-          Platform documentation.
-        </p>
-      </div>
-      <div className="cs1 ce12">
-        <a
-          className="button button-primary"
-          target="_blank"
-          href="https://developers.miro.com"
-        >
-          Read the documentation
-        </a>
-      </div>
+    <div className="wrapper">
+      {selectedBoard ?
+        <BoardActionsApp />
+        :
+        <BoardsPickerApp />
+      }
     </div>
   );
 };
 
 const container = document.getElementById('root');
-const root = createRoot(container);
+const root = createRoot(container!);
 root.render(<App />);
