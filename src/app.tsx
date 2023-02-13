@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import { sendMetricBoardEmbedded, sendMetricBoardOpened, sendMetricBoardPicked } from './firebase';
+import { sendMetricBoardEmbedded, sendMetricBoardOpenedNewTab, sendMetricBoardOpenedPopup, sendMetricBoardPicked } from './firebase';
 
 const App: React.FC = () => {
 
@@ -24,7 +24,14 @@ const App: React.FC = () => {
 
   const openBoardInNewTab = () => {
     window.open(selectedBoard!.viewLink, "_blank");
-    sendMetricBoardOpened();
+    sendMetricBoardOpenedNewTab();
+  };
+
+  const openBoardInPopup = async () => {
+    await miro.board.ui.openModal({
+      url: selectedBoard!.viewLink
+    });
+    sendMetricBoardOpenedPopup();
   };
 
   const addBoardEmbed = async () => {
@@ -55,6 +62,9 @@ const App: React.FC = () => {
       <button className="button button-primary" onClick={openBoardInNewTab}>
         <span className="icon-eye"></span>
         Open In New Tab
+      </button>
+      <button className="button button-primary" onClick={openBoardInPopup}>
+        Open In Popup
       </button>
       <button className="button button-primary" onClick={addBoardEmbed}>
         Embed On Current Board

@@ -18,8 +18,12 @@ export const sendMetricBoardPicked = () => {
     logEvent(analytics, 'BOARD_PICKED');
 }
 
-export const sendMetricBoardOpened = () => {
+export const sendMetricBoardOpenedNewTab = () => {
     logEvent(analytics, 'BOARD_OPEN_NEW_TAB');
+}
+
+export const sendMetricBoardOpenedPopup = () => {
+    logEvent(analytics, 'BOARD_OPEN_POPUP');
 }
 
 export const sendMetricBoardEmbedded = () => {
