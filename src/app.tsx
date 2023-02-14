@@ -11,7 +11,7 @@ const App: React.FC = () => {
       return;
     }
     miroBoardsPicker.open({
-      clientId: '3458764530513120042',
+      clientId: '3458764546007773933',
       action: 'select',
       iframeContainer: 'boardsPickerContainer',
       success: (result: any) => {
