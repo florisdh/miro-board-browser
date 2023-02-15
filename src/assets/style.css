@@ -52,3 +52,9 @@ img {
 #boardActionsApp {
   padding: 2em;
 }
+
+.feedback-button {
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+}

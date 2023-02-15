@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "firebase": "^9.17.1",
-    "mirotone": "3",
+    "mirotone": "4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

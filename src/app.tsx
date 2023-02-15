@@ -47,6 +47,10 @@ const App: React.FC = () => {
     setSelectedBoard(undefined);
   };
 
+  const openFeedbackForm = () => {
+    window.open('https://forms.gle/S2JgrwE4N6sfT8VX9', "_blank");
+  };
+
   const BoardsPickerApp = () => (
     <div id="boardsPickerContainer" />
   );
@@ -85,6 +89,9 @@ const App: React.FC = () => {
         :
         <BoardsPickerApp />
       }
+      <button className="feedback-button button button-tertiary" onClick={openFeedbackForm}>
+        <span className="icon-comment-feedback"></span>
+      </button>
     </div>
   );
 };
