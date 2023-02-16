@@ -36,6 +36,7 @@ img {
 .button {
   text-decoration: none;
   display: block;
+  width: 100%;
 }
 
 #root,
@@ -55,6 +56,7 @@ img {
 }
 
 .feedback-button {
+  width: auto;
   position: absolute;
   bottom: 2em;
   right: 2em;
