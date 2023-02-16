@@ -64,7 +64,6 @@ const App: React.FC = () => {
       <br />
 
       <button className="button button-primary" onClick={openBoardInNewTab}>
-        <span className="icon-eye"></span>
         Open In New Tab
       </button>
       <button className="button button-primary" onClick={openBoardInPopup}>
@@ -89,7 +88,7 @@ const App: React.FC = () => {
         :
         <BoardsPickerApp />
       }
-      <button className="feedback-button button button-tertiary" onClick={openFeedbackForm}>
+      <button className="feedback-button button button-tertiary" onClick={openFeedbackForm} title="Feedback">
         <span className="icon-comment-feedback"></span>
       </button>
     </div>
